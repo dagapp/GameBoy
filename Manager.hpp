@@ -34,8 +34,13 @@ class Manager : public Program
       if (Active == this)
       {
         //Cдвиг окна выбора программы
-        if (buttons->Up)   ChooseNumber -= (ChooseNumber > 0)         ? 1 : 0;
-        if (buttons->Down) ChooseNumber += (ChooseNumber < Count - 1) ? 1 : 0;
+        if      (buttons->Up)   ChooseNumber -= (ChooseNumber > 0)         ? 1 : 0;
+        else if (buttons->Down) ChooseNumber += (ChooseNumber < Count - 1) ? 1 : 0;
+        else if (buttons->Pick)
+        {
+          Active = Programs[ChooseNumber];
+          ChooseNumber = 0;
+        }
 
         Draw(); //Отрисовка менеджера программ
       }
@@ -55,6 +60,7 @@ class Manager : public Program
     virtual void Draw() override
     {
       //Отрисовка менеджера программ
+      Graphics::Clear();
 
       Graphics::Stroke(255, 255, 255);
       Graphics::Rect(0, 0, WINDOW_WIDTH, 50, true);
@@ -87,8 +93,6 @@ class Manager : public Program
         
         y += 20;
       }
-
-      Graphics::Clear();
     }
 };
 

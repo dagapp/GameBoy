@@ -34,7 +34,7 @@ void setup()
   pinMode( PICK, INPUT);
   pinMode( EXIT, INPUT);
 
-  //Начало чтение COM-порта (виртуального)
+  //Начало чтения COM-порта (виртуального)
   Serial.begin(115200);
 }
 

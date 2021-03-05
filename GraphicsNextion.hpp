@@ -3,6 +3,8 @@
 
 #include <SoftwareSerial.h>
 
+#include "Color.hpp"
+
 #define WINDOW_WIDTH  240
 #define WINDOW_HEIGHT 320
 
@@ -11,6 +13,8 @@ class Graphics
   public:
   //private:
     static SoftwareSerial NextionSerial;
+
+    //static Color DrawColor;
 
     static void CommandEnd()
     {
@@ -21,6 +25,7 @@ class Graphics
     static void Begin()
     {
       NextionSerial.begin(9600);
+      //DrawColor = Color::White;
     }
 
     static void Clear()
@@ -29,7 +34,10 @@ class Graphics
       CommandEnd();
     }
 
-    static void Stroke(int r, int g, int b) { }
+    static void Stroke(int r, int g, int b)
+    {
+        //DrawColor = color;
+    }
 
     static void Text(const char * text, int x, int y) { }
 
@@ -81,6 +89,11 @@ class Graphics
         NextionSerial.print("BLACK");
         CommandEnd();
       }
+    }
+
+    static void Square(int x, int y, int size, bool fill = false)
+    {
+      Rect(x, y, size, size, fill);
     }
 
     static void Circle(int x, int y, int radius, bool fill = false) { }
