@@ -1,7 +1,7 @@
 #ifndef PROGRAM
 #define PROGRAM
 
-#include "Graphics.hpp"
+#include "GraphicsNextion.hpp"
 
 #include "Buttons.hpp"
 

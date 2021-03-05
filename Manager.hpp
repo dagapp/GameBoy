@@ -87,6 +87,8 @@ class Manager : public Program
         
         y += 20;
       }
+
+      Graphics::Clear();
     }
 };
 

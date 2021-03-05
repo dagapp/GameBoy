@@ -20,6 +20,8 @@ Manager manager(programs, COUNT); //Менеджер программ (сам я
 #define PICK  6
 #define EXIT  7
 
+#include <SoftwareSerial.h>
+
 void setup() 
 {
   //manager.Begin(programs, COUNT);
@@ -33,7 +35,7 @@ void setup()
   pinMode( EXIT, INPUT);
 
   //Начало чтение COM-порта (виртуального)
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() 
@@ -51,5 +53,7 @@ void loop()
 
   buttons.Print(); //Вывод состояния кнопок
 
-  manager.Process(&buttons); //Отправка состояния кнопок в программный менеджер
+  manager.Process(&buttons);//Отправка состояния кнопок в программный менеджер
+
+  //delay();
 }
