@@ -30,7 +30,7 @@ class Snake : public Program
 		if (buttons->Right)
 			dir = 3;
 
-    Rect(size * s[snakeLength - 1].x, size * s[snakeLength - 1].y, size, size);
+    Graphics::Rect(size * s[snakeLength - 1].x, size * s[snakeLength - 1].y, size, size);
 		for (int i = snakeLength - 1; i > 0; --i)
 			s[i] = s[i - 1];
 		if (dir == 0)
@@ -42,14 +42,14 @@ class Snake : public Program
 		if (dir == 3)
 			s[0].x += 1;
 		for (int i = 0; i < snakeLength; i++)
-			Rect(size * s[i].x, size * s[i].y, size, size, true);
+			Graphics::Rect(size * s[i].x, size * s[i].y, size, size, true);
 
 		if (s[0].x == Apple.x && s[0].y == Apple.y)
 		{
 			snakeLength += 1;
 			Apple.x = rand() % length;
 			Apple.y = rand() % length;
-		  Rect(size * Apple.x, size * Apple.y, size, size, true);
+		  Graphics::Rect(size * Apple.x, size * Apple.y, size, size, true);
 		}
 
 		for (int i = snakeLength - 1; i > 0; --i)
@@ -81,7 +81,7 @@ class Snake : public Program
     {
         for (int i = 0; i < length; i++)
           for (int j = 0; j < length; j++)
-            Rect(size * i, size * j, size, size);
+            Graphics::Rect(size * i, size * j, size, size);
     }
 };
 
