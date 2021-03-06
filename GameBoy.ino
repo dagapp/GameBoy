@@ -4,14 +4,14 @@
 #include "Tetris.hpp"
 
 //Создание объектов программ
-Snake  snake/*("Змейка")*/;
-Tetris tetris/*("Тетрис")*/;
+Snake  snake("Змейка");
+Tetris tetris("Тетрис");
 
 #define COUNT 2 //Поменять в соответсвии с количеством программ !!!
 
 Program ** programs = new Program * [COUNT] { &snake, &tetris }; //Массив программ - не забыть инициализировать !!
-Manager manager(programs, COUNT); //Менеджер программ (сам является программой)
-//Manager manager("Меню");
+//Manager manager(programs, COUNT); //Менеджер программ (сам является программой)
+Manager manager("Меню");
 
 #define LEFT  2
 #define UP    3
@@ -24,7 +24,10 @@ Manager manager(programs, COUNT); //Менеджер программ (сам я
 
 void setup() 
 {
-  //manager.Begin(programs, COUNT);
+  manager.Begin(programs, COUNT);
+
+  //Color color(0, G_MAX, 0);
+  //Serial.print(color.ToNumber());
 
   //Назначение пинов для кнопок
   pinMode( LEFT, INPUT);

@@ -14,12 +14,14 @@ class Manager : public Program
     uint8_t ChooseNumber;
 
   public:
-    Manager(Program ** programs, int count) : Programs(programs), Count(count), Active(this), ChooseNumber(0)
+    /*Manager(Program ** programs, int count) : Programs(programs), Count(count), Active(this), ChooseNumber(0)
     {
       Graphics::Begin();  
-    }
+    }*/
 
-    /*void Begin(Program ** programs, int count)
+    using Program::Program;
+
+    void Begin(Program ** programs, uint8_t count)
     {
       Programs = programs;
       Count = count;
@@ -27,7 +29,7 @@ class Manager : public Program
       ChooseNumber = 0;
 
       Graphics::Begin();
-    }*/
+    }
 
     virtual void Process(Buttons * buttons) override
     {
@@ -69,8 +71,8 @@ class Manager : public Program
       Graphics::SetTextSize(2);
       Graphics::Text("Выберите игру", 0, 0);
 
-      int y = 50;
-      for (int i = 0; i < Count; i++)
+      uint8_t y = 50;
+      for (uint8_t i = 0; i < Count; i++)
       {
         y += 5;
 
@@ -80,7 +82,7 @@ class Manager : public Program
           Graphics::Rect(10, y + 5, WINDOW_WIDTH - 20, 10);        
 
           Graphics::Stroke(0, 0, 0);
-          //Graphics::Text(Programs[i]->GetName(), 10, y + 5);
+          Graphics::Text(Programs[i]->GetName(), 10, y + 5);
         }
         else
         {
@@ -88,7 +90,7 @@ class Manager : public Program
           Graphics::Rect(5, y, WINDOW_WIDTH - 5, 20);        
 
           Graphics::Stroke(0, 0, 0);
-          //Graphics::Text(Programs[i]->GetName(), 5, y);
+          Graphics::Text(Programs[i]->GetName(), 5, y);
         }
         
         y += 20;

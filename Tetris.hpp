@@ -8,6 +8,8 @@ class Tetris : public Program
   private:
 
   public:
+    using Program::Program;
+    
     virtual void Process(Buttons * buttons) override
     {
       

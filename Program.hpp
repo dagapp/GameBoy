@@ -8,18 +8,18 @@
 class Program
 {
   private:
-    //char * Name;
+    String Name;
   
   public:
-    //virtual Program(char * name) : Name(name) { };
+    virtual Program(String name) : Name(name) { };
   
     virtual void Process(Buttons * buttons) = 0; //Обработка кнопок программой
     virtual void Draw() = 0; //Отрисовка окна программы
 
-    /*char * GetName() const
+    String GetName() const
     {
       return Name;
-    }*/
+    }
 };
 
 #endif

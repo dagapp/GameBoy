@@ -3,7 +3,7 @@
 
 struct Point
 {
-  int x, y;
+  uint16_t x, y;
 }
 
 #endif
