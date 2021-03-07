@@ -14,22 +14,14 @@ class Manager : public Program
     uint8_t ChooseNumber;
 
   public:
-    /*Manager(Program ** programs, int count) : Programs(programs), Count(count), Active(this), ChooseNumber(0)
+    Manager(Program ** programs, int count) : Program("Меню"), Programs(programs), Count(count), Active(this), ChooseNumber(0) { }
+
+    virtual void Begin() override
     {
-      Graphics::Begin();  
-    }*/
-
-    using Program::Program;
-
-    void Begin(Program ** programs, uint8_t count)
-    {
-      Programs = programs;
-      Count = count;
-      Active = this;
-      ChooseNumber = 0;
-
       Graphics::Begin();
     }
+
+    virtual void End() override { }
 
     virtual void Process(Buttons * buttons) override
     {
@@ -41,6 +33,8 @@ class Manager : public Program
         else if (buttons->Pick)
         {
           Active = Programs[ChooseNumber];
+          Active->Begin();
+          
           ChooseNumber = 0;
         }
 
@@ -50,6 +44,7 @@ class Manager : public Program
       {
         if (buttons->Exit)
         {
+          Active->End();
           Active = this;
         }
         else
@@ -64,36 +59,30 @@ class Manager : public Program
       //Отрисовка менеджера программ
       Graphics::Clear();
 
-      Graphics::Stroke(255, 255, 255);
+      Graphics::ChangeColor(Color565::Orange);
       Graphics::Rect(0, 0, WINDOW_WIDTH, 50, true);
 
-      Graphics::Stroke(0, 0, 0);
-      Graphics::SetTextSize(2);
-      Graphics::Text("Выберите игру", 0, 0);
+      //Graphics::Stroke(0, 0, 0);
+      //Graphics::SetTextSize(2);
+      Graphics::Text("Выберите игру", 0, 0, WINDOW_WIDTH, 50);
 
       uint8_t y = 50;
       for (uint8_t i = 0; i < Count; i++)
       {
-        y += 5;
+        y += 10;
+        
+        Graphics::ChangeColor(0, 0, 0);
+        Graphics::Rect(10, y, WINDOW_WIDTH - 20, 50);  
 
         if (i == ChooseNumber)
         {
-          Graphics::Stroke(255, 255, 255);
-          Graphics::Rect(10, y + 5, WINDOW_WIDTH - 20, 10);        
-
-          Graphics::Stroke(0, 0, 0);
-          Graphics::Text(Programs[i]->GetName(), 10, y + 5);
-        }
-        else
-        {
-          Graphics::Stroke(255, 255, 255);
-          Graphics::Rect(5, y, WINDOW_WIDTH - 5, 20);        
-
-          Graphics::Stroke(0, 0, 0);
-          Graphics::Text(Programs[i]->GetName(), 5, y);
+          Graphics::ChangeColor(Color565::Gray);
+          Graphics::Rect(12, y + 2, WINDOW_WIDTH - 24, 46, true);
+          Graphics::ChangeColor(Color565::Black);
+          Graphics::Rect(12, y + 2, WINDOW_WIDTH - 24, 46);
         }
         
-        y += 20;
+        y += 50;
       }
     }
 };
