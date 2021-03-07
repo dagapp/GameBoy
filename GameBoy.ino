@@ -50,7 +50,7 @@ void loop()
   buttons.Pick  = digitalRead( PICK);
   buttons.Exit  = digitalRead( EXIT);
 
-  buttons.Print(); //--------//Вывод состояния кнопок
+  //buttons.Print(); //--------//Вывод состояния кнопок (тяжёлый)
 
   manager.Process(&buttons); //Отправка состояния кнопок в программный менеджер
 }
