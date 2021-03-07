@@ -37,7 +37,9 @@ class Snake : public Program
       if (buttons->Right)
         dir = 3;
 
-      Graphics::Square(size * s[snakeLength - 1].x, size * s[snakeLength - 1].y, size); //Сделать с белой заливкой (против говняного следа)
+      Graphics::ChangeColor();
+      Graphics::Square(size * s[snakeLength - 1].x, size * s[snakeLength - 1].y, size, true); //Сделать с белой заливкой (против говняного следа)
+      Graphics::ChangeColor(0, 0, 0);
       for (int i = snakeLength - 1; i > 0; --i)
         s[i] = s[i - 1];
       if (dir == 0)
