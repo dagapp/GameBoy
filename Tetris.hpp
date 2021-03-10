@@ -79,7 +79,7 @@ class Figure
 Figure Figure::J(6426624,  &Color565::Blue);
 Figure Figure::I(4329600,  &Color565::Cian);
 Figure Figure::O(202752,   &Color565::Yellow);
-Figure Figure::L(12718080, &Color565::Cian);
+Figure Figure::L(12718080, &Color565::Orange);
 Figure Figure::Z(399360,   &Color565::Red);
 Figure Figure::T(462848,   &Color565::Purple);
 Figure Figure::S(208896,   &Color565::Green);
