@@ -2,14 +2,16 @@
 #include "Manager.hpp"
 #include "Snake.hpp"
 #include "Tetris.hpp"
+#include "PingPong.hpp"
 
 //Создание объектов программ
 Snake  snake;
 Tetris tetris;
+PingPong pingpong;
 
-#define COUNT 2 //-----------------------------------------------//Поменять в соответсвии с количеством программ !!!
+#define COUNT 3 //-----------------------------------------------//Поменять в соответсвии с количеством программ !!!
 
-Program ** programs = new Program * [COUNT] { &snake, &tetris }; //Массив программ - не забыть инициализировать !!
+Program ** programs = new Program * [COUNT] { &snake, &tetris, &pingpong }; //Массив программ - не забыть инициализировать !!
 Manager manager(programs, COUNT) ; //----------------------------//Менеджер программ (сам является программой)
 
 #define LEFT  2
@@ -50,7 +52,7 @@ void loop()
   buttons.Pick  = digitalRead( PICK);
   buttons.Exit  = digitalRead( EXIT);
 
-  //buttons.Print(); //--------//Вывод состояния кнопок (тяжёлый)
+  buttons.Print(); //--------//Вывод состояния кнопок
 
   manager.Process(&buttons); //Отправка состояния кнопок в программный менеджер
 }

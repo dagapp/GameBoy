@@ -19,19 +19,26 @@ class Snake : public Program
 
     int dir = 2, snakeLength = 4;
     bool GameOver = false;
+    bool to_draw = true;
 
   public:
     Snake() : Program("Змейка") { } 
 
     virtual void Begin() override { }
-    virtual void End() override { }
+    virtual void End() override 
+    {
+        GameOver = false;
+        to_draw = true;
+        dir = 2;
+        snakeLength = 4;
+        s[0].x = 0;
+        s[0].y = 0; 
+    }
     
     virtual void Process(Buttons * buttons) override
     {
       if (!GameOver)
       {
-        static bool to_draw = true;
-
         if (buttons->Up)
             dir = 0;
         if (buttons->Left)
@@ -53,17 +60,12 @@ class Snake : public Program
             s[0].y += 1;
         if (dir == 3)
             s[0].x += 1;
-        for (int i = 0; i < snakeLength; i++)
-        {
-            Graphics::ChangeColor(Color565::Orange);
-            Graphics::Square(size * s[i].x, size * s[i].y, size, true);         
-        }
 
         if (s[0].x == Apple.x && s[0].y == Apple.y)
         {
             snakeLength += 1;
-            Apple.x = rand() % length;
-            Apple.y = rand() % length;
+            Apple.x = rand() % (length - 1);
+            Apple.y = rand() % (length - 1);
             Graphics::ChangeColor(Color565::Red);
             Graphics::Square(size * Apple.x, size * Apple.y, size, true);
         }
@@ -71,36 +73,49 @@ class Snake : public Program
         for (int i = snakeLength - 1; i > 0; --i)
             if (s[0].x == s[i].x && s[0].y == s[i].y)
                 GameOver = true;
-
-        for (int i = 0; i < snakeLength; i++)
+                
+        if (s[0].x > length - 1 || s[0].x < 0 || s[0].y < 0 || s[0].y > length - 1)
         {
-            if (s[i].x >= length)
+          for (int i = 0; i < snakeLength; i++)
+          {
+            if (s[i].x > length - 1)
             {
                 s[i].x = 0;
             }
-            else if (s[i].x <= 0)
+            else if (s[i].x < 0)
             {
-                s[i].x = length;
+                s[i].x = length - 1;
             }
-            else if (s[i].y <= 0)
+            else if (s[i].y < 0)
             {
-                s[i].y = length;
+                s[i].y = length - 1;
             }
-            else if (s[i].y >= length)
+            else if (s[i].y > length - 1)
             {
                 s[i].y = 0;
             }
+          }
+        }
+
+        for (int i = 0; i < snakeLength; i++)
+        {
+            Graphics::ChangeColor(Color565::Orange);
+            Graphics::Square(size * s[i].x, size * s[i].y, size, true);      
         }
 
         if (to_draw)
         {
             Draw();
-            Apple.x = rand() % length;
-            Apple.y = rand() % length;
+            Apple.x = rand() % (length - 1);
+            Apple.y = rand() % (length - 1);
             Graphics::ChangeColor(Color565::Red);
             Graphics::Square(size * Apple.x, size * Apple.y, size, true);
             to_draw = false;
         }
+      }
+      else
+      {
+        
       }
     }
 
