@@ -97,11 +97,10 @@ class Snake : public Program
           }
         }
 
-        for (int i = 0; i < snakeLength; i++)
-        {
-            Graphics::ChangeColor(Color565::Orange);
-            Graphics::Square(size * s[i].x, size * s[i].y, size, true);      
-        }
+        Graphics::ChangeColor(Color565::Orange);
+        Graphics::Square(size * s[0].x, size * s[0].y, size, true);  
+        Graphics::ChangeColor(Color565::Green);
+        Graphics::Square(size * s[snakeLength - 1].x, size * s[snakeLength - 1].y, size, true);  
 
         if (to_draw)
         {
